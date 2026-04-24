@@ -21,6 +21,14 @@ export function initFiltering(elements, indexes) {
       state[action.dataset.field] = '';
     }
 
-    return data.filter((row) => compare(row, state));
+    const filterState = {
+      ...state,
+      total: [
+        state.totalFrom ? parseFloat(state.totalFrom) : null,
+        state.totalTo ? parseFloat(state.totalTo) : null,
+      ],
+    };
+
+    return data.filter((row) => compare(row, filterState));
   };
 }
